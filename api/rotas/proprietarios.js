@@ -3,6 +3,7 @@ import { getOcorrencias, getProprietarios, addProprietarios, deleteProprietarios
 
 const rotas = express.Router();
 
+//Ocorrencias
 rotas.get("/", getOcorrencias);
 
 //Proprietarios
