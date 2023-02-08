@@ -135,3 +135,70 @@ export const deleteUnidades = (req, res) => {
         return res.status(200).json("Unidade deletada com sucesso.");
     });
 };
+
+// Gestão
+
+export const getGestao = (_, res) => {
+    const q = "SELECT * from gestao";
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json(data);
+    })
+}
+
+export const addGestao = (req, res) => {
+    const q =
+        "INSERT INTO gestao(`id_gestao`, `dt_inicio`, `dt_fim`, `atos`, `estatuto` , `cpf_sindico`, `cpf_subsindico`) VALUES(?)";
+
+    const values = [
+        parseInt(req.body.id_gestao),
+        req.body.dt_inicio,
+        req.body.dt_fim,
+        req.body.atos,
+        req.body.estatuto,
+        req.body.cpf_sindico,
+        req.body.cpf_subsindico,
+    ];
+
+    console.log(values)
+
+    db.query(q, [values], (err) => {
+        if (err) return console.log("Erro")
+        //res.json(err);
+
+        return res.status(200).json("Gestão criada com sucesso.");
+    });
+};
+
+export const updateGestao = (req, res) => {
+    const q =
+        "UPDATE unidades SET `id_gestao` = ?, `dt_inicio` = ?, `dt_fim` = ?, `atos` = ?, `estatuto` = ?, `cpf_sindico` = ?, `cpf_subsindico` = ? WHERE `id_gestao` = ?";
+
+    const values = [
+        parseInt(req.body.id_gestao),
+        req.body.dt_inicio,
+        req.body.dt_fim,
+        req.body.atos,
+        req.body.estatuto,
+        req.body.cpf_sindico,
+        req.body.cpf_subsindico,
+    ];
+    console.log(values)
+    db.query(q, [...values, parseInt(req.params.id)], (err) => {
+        if (err) res.json(err);
+
+        return res.status(200).json("Gestão atualizada com sucesso.");
+    });
+};
+
+export const deleteGestao = (req, res) => {
+    const q = "DELETE FROM gestao WHERE `id_gestao` = ?";
+
+    db.query(q, [parseInt(req.params.id)], (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("Gestao deletada com sucesso.");
+    });
+};
