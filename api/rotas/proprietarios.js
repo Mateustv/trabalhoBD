@@ -1,5 +1,5 @@
 import express from "express";
-import { getOcorrencias, getProprietarios, addProprietarios, deleteProprietarios, updateProprietarios, getUnidades, addUnidades, updateUnidades, deleteUnidades, addGestao, updateGestao, deleteGestao, getGestao } from "../controladoras/proprietarios.js";
+import { getOcorrencias, getProprietarios, addProprietarios, deleteProprietarios, updateProprietarios, getUnidades, addUnidades, updateUnidades, deleteUnidades, addGestao, updateGestao, deleteGestao, getGestao, getAreasComuns, addAreasComuns, updateAreasComuns, deleteAreasComuns } from "../controladoras/proprietarios.js";
 
 const rotas = express.Router();
 
@@ -23,6 +23,13 @@ rotas.get("/gestao", getGestao);
 rotas.post("/gestao", addGestao);
 rotas.put("/gestao/:id", updateGestao);
 rotas.delete("/gestao/:id", deleteGestao);
+
+//Areas Comuns
+
+rotas.get("/areascomuns", getAreasComuns);
+rotas.post("/areascomuns", addAreasComuns);
+rotas.put("/areascomuns/:id", updateAreasComuns);
+rotas.delete("/areascomuns/:id", deleteAreasComuns);
 
 
 export default rotas;

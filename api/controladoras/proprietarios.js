@@ -202,3 +202,64 @@ export const deleteGestao = (req, res) => {
         return res.status(200).json("Gestao deletada com sucesso.");
     });
 };
+
+//Areas Comuns
+
+export const getAreasComuns = (_, res) => {
+    const q = "SELECT * from areas_comuns";
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json(data);
+    })
+}
+
+export const addAreasComuns = (req, res) => {
+    const q =
+        "INSERT INTO areas_comuns(`id_area`, `nome`, `regras`, `capacidade`) VALUES(?)";
+
+    const values = [
+        parseInt(req.body.id_area),
+        req.body.nome,
+        req.body.regras,
+        req.body.capacidade,
+    ];
+
+    console.log(values)
+
+    db.query(q, [values], (err) => {
+        if (err) return console.log("Erro")
+        //res.json(err);
+
+        return res.status(200).json("Area criada com sucesso.");
+    });
+};
+
+export const updateAreasComuns = (req, res) => {
+    const q =
+        "UPDATE areas_comuns SET `id_area` = ?, `nome` = ?, `regras` = ?, `capacidade` = ? WHERE `id_area` = ?";
+
+    const values = [
+        parseInt(req.body.id_area),
+        req.body.nome,
+        req.body.regras,
+        req.body.capacidade,
+    ];
+    console.log(values)
+    db.query(q, [...values, parseInt(req.params.id)], (err) => {
+        if (err) res.json(err);
+
+        return res.status(200).json("Area atualizada com sucesso.");
+    });
+};
+
+export const deleteAreasComuns = (req, res) => {
+    const q = "DELETE FROM areas_comuns WHERE `id_area` = ?";
+
+    db.query(q, [parseInt(req.params.id)], (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("Area deletada com sucesso.");
+    });
+};
