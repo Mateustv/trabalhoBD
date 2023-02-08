@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { FormProprietario } from "../components/Form.jsx";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { GridProprietarios } from "../components/Grid.jsx";
 import axios from "axios";
+import { FormProprietario } from "@/components/FormProprietarios";
+import { GridProprietarios } from "@/components/GridProprietarios";
 
 
 

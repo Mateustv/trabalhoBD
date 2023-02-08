@@ -87,67 +87,6 @@ const Grid = ({ proprietarios }) => {
   )
 }
 
-const GridProprietarios = ({ proprietarios, setProprietarios, setOnEdit }) => {
-  const formatar_data = (dataTempo) => {
-    let data = new Date(dataTempo);
-    let dataFormatada = ((data.getDate()) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear());
-    return dataFormatada;
-  }
-
-  const handleEdit = (item) => {
-    setOnEdit(item);
-  };
-
-  const handleDelete = async (id) => {
-    await axios
-      .delete("http://localhost:8800/proprietarios/" + id)
-      .then(({ data }) => {
-        const newArray = proprietarios.filter((proprietario) => proprietario.CPF !== id);
-        console.log(newArray)
-        setProprietarios(newArray);
-        toast.success(data);
-      })
-      .catch(({ data }) => toast.error(data));
-
-    setOnEdit(null);
-  };
-
-  return (
-    <Table>
-      <Thead>
-        <Tr>
-          <Th>CPF</Th>
-          <Th>Nome</Th>
-          <Th>Telefone</Th>
-          <Th>E-mail</Th>
-          <Th>Data de Nascimento</Th>
-          <Th>Status</Th>
-          <Th></Th>
-          <Th></Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {proprietarios.map((item, i) => (
-          <Tr key={i}>
-            <Td width="16%">{item.CPF}</Td>
-            <Td width="20%">{item.NOME}</Td>
-            <Td width="14%">{item.TELEFONE}</Td>
-            <Td width="20%">{item.EMAIL}</Td>
-            <Td width="20%">{formatar_data(item.DT_NASCIMENTO)}</Td>
-            <Td width="15%">{item.STATUS}</Td>
-            <Td alignCenter width="6%">
-              <FaEdit onClick={() => handleEdit(item)} />
-            </Td>
-            <Td alignCenter width="5%">
-              <FaTrash onClick={() => handleDelete(item.CPF)} />
-            </Td>
-          </Tr>
-        ))
-        }
-      </Tbody>
-    </Table>
-  )
-}
 
 
 
