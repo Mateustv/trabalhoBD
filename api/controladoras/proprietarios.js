@@ -85,19 +85,22 @@ export const getUnidades = (_, res) => {
 
 export const addUnidades = (req, res) => {
     const q =
-        "INSERT INTO unidades(`id_unidade`, `cpf_proprietario`, `bloco`, `numero`, `num_vaga` , `placa_veiuclo`) VALUES(?)";
+        "INSERT INTO unidades(`id_unidade`, `cpf_proprietario`, `bloco`, `numero`, `num_vaga` , `placa_veiculo`) VALUES(?)";
 
     const values = [
-        req.body.id_unidade,
+        parseInt(req.body.id_unidade),
         req.body.cpf_proprietario,
         req.body.bloco,
         req.body.numero,
         req.body.num_vaga,
-        req.body.placa_veiuclo,
+        req.body.placa_veiculo,
     ];
 
+    console.log(values)
+
     db.query(q, [values], (err) => {
-        if (err) return res.json(err);
+        if (err) return console.log("Erro")
+        //res.json(err);
 
         return res.status(200).json("Unidade criada com sucesso.");
     });
@@ -105,20 +108,19 @@ export const addUnidades = (req, res) => {
 
 export const updateUnidades = (req, res) => {
     const q =
-        "UPDATE unidades SET `id_unidade` = ?, `cpf_proprietario` = ?, `bloco` = ?, `numero` = ?, `num_vaga` = ?, `placa_veiuclo` = ? WHERE `id_unidade` = ?";
+        "UPDATE unidades SET `id_unidade` = ?, `cpf_proprietario` = ?, `bloco` = ?, `numero` = ?, `num_vaga` = ?, `placa_veiculo` = ? WHERE `id_unidade` = ?";
 
     const values = [
-        req.body.id_unidade,
+        parseInt(req.body.id_unidade),
         req.body.cpf_proprietario,
         req.body.bloco,
         req.body.numero,
         req.body.num_vaga,
-        req.body.placa_veiuclo,
+        req.body.placa_veiculo,
     ];
     console.log(values)
-    db.query(q, [...values, req.params.id], (err) => {
-        if (err)
-            return res.json(err);
+    db.query(q, [...values, parseInt(req.params.id)], (err) => {
+        if (err) res.json(err);
 
         return res.status(200).json("Unidade atualizada com sucesso.");
     });
@@ -127,7 +129,7 @@ export const updateUnidades = (req, res) => {
 export const deleteUnidades = (req, res) => {
     const q = "DELETE FROM unidades WHERE `id_unidade` = ?";
 
-    db.query(q, [req.params.id], (err) => {
+    db.query(q, [parseInt(req.params.id)], (err) => {
         if (err) return res.json(err);
 
         return res.status(200).json("Unidade deletada com sucesso.");

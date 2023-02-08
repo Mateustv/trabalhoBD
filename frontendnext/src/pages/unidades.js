@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { FormProprietario } from "../components/Form.jsx";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { GridProprietarios } from "../components/Grid.jsx";
 import axios from "axios";
+import { FormUnidades } from "@/components/FormUnidades";
+import { GridUnidades } from "@/components/GridUnidade";
 
 
 
@@ -29,28 +29,28 @@ const Button = styled.button`
 
 const Title = styled.h2``;
 
-export default function proprietarios() {
-    const [proprietarios, setProprietarios] = useState([]);
+export default function unidades() {
+    const [unidades, setUnidades] = useState([]);
     const [onEdit, setOnEdit] = useState(null);
 
-    const getProprietarios = async () => {
+    const getUnidades = async () => {
         try {
-            const res = await axios.get("http://localhost:8800/proprietarios");
-            setProprietarios(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
+            const res = await axios.get("http://localhost:8800/unidades");
+            setUnidades(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
         } catch (error) {
             toast.error(error);
         }
     };
 
     useEffect(() => {
-        getProprietarios();
-    }, [setProprietarios]);
+        getUnidades();
+    }, [setUnidades]);
     return (
         <>
             <Container>
-                <Title>Proprietários</Title>
-                <FormProprietario setOnEdit={setOnEdit} onEdit={onEdit} getProprietarios={getProprietarios} />
-                <GridProprietarios proprietarios={proprietarios} setProprietarios={setProprietarios} setOnEdit={setOnEdit} />
+                <Title>Unidades</Title>
+                <FormUnidades setOnEdit={setOnEdit} onEdit={onEdit} getUnidades={getUnidades} />
+                <GridUnidades unidades={unidades} setUnidades={setUnidades} setOnEdit={setOnEdit} />
                 <Button><a href="/">Voltar</a></Button>
             </Container>
 

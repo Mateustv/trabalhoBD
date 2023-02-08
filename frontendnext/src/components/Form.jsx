@@ -120,7 +120,7 @@ const FormProprietario = ({ onEdit, setOnEdit, getProprietarios }) => {
     ) {
       return toast.warn("Preencha todos os campos!");
     }
-    console.log(onEdit)
+    //    console.log(onEdit)
     if (onEdit) {
       await axios
         .put("http://localhost:8800/proprietarios/" + onEdit.CPF, {
@@ -181,5 +181,7 @@ const FormProprietario = ({ onEdit, setOnEdit, getProprietarios }) => {
   );
 
 };
+
+
 
 export { FormOcorrencias, FormProprietario };
