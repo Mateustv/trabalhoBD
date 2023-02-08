@@ -17,6 +17,15 @@ const Container = styled.div`
   align-items: center;
   gap: 10px;
 `;
+const Button = styled.button`
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background-color: #2c73d2;
+  color: white;
+  height: 42px;
+`;
 
 const Title = styled.h2``;
 
@@ -42,7 +51,9 @@ export default function proprietarios() {
                 <Title>Proprietários</Title>
                 <FormProprietario setOnEdit={setOnEdit} onEdit={onEdit} getProprietarios={getProprietarios} />
                 <GridProprietarios proprietarios={proprietarios} setProprietarios={setProprietarios} setOnEdit={setOnEdit} />
+                <Button><a href="/">Voltar</a></Button>
             </Container>
+
             <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
         </>
     )

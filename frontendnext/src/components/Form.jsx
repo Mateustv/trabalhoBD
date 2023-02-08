@@ -87,6 +87,12 @@ const FormOcorrencias = ({ OnEdit }) => {
 const FormProprietario = ({ onEdit, setOnEdit, getProprietarios }) => {
   const ref = useRef();
 
+  const formatar_data = (dataTempo) => {
+    let data = new Date(dataTempo);
+    let dataFormatada = (data.getFullYear() + "-" + ((data.getMonth() + 1)) + "-" + (data.getDate()));
+    return dataFormatada;
+  }
+
   useEffect(() => {
     if (onEdit) {
       const user = ref.current;
@@ -94,7 +100,7 @@ const FormProprietario = ({ onEdit, setOnEdit, getProprietarios }) => {
       user.nome.value = onEdit.NOME;
       user.telefone.value = onEdit.TELEFONE;
       user.email.value = onEdit.EMAIL;
-      user.dt_nascimento.value = onEdit.DT_NASCIMENTO;
+      user.dt_nascimento.value = formatar_data(onEdit.DT_NASCIMENTO);
       user.status.value = onEdit.STATUS;
     }
   }, [onEdit]);
@@ -103,12 +109,7 @@ const FormProprietario = ({ onEdit, setOnEdit, getProprietarios }) => {
     e.preventDefault();
 
     const user = ref.current;
-    console.log(!user.cpf.value)
-    console.log(!user.nome.value)
-    console.log(!user.telefone.value)
-    console.log(!user.email.value)
-    console.log(!user.dt_nascimento.value)
-    console.log(!user.status.value)
+
     if (
       !user.cpf.value ||
       !user.nome.value ||
@@ -127,7 +128,7 @@ const FormProprietario = ({ onEdit, setOnEdit, getProprietarios }) => {
           nome: user.nome.value,
           telefone: user.telefone.value,
           email: user.email.value,
-          dt_nascimento: user.dt_nascimento.value,
+          dt_nascimento: formatar_data(user.dt_nascimento.value),
           status: user.status.value,
         })
         .then(({ data }) => toast.success(data))
@@ -139,7 +140,7 @@ const FormProprietario = ({ onEdit, setOnEdit, getProprietarios }) => {
           nome: user.nome.value,
           telefone: user.telefone.value,
           email: user.email.value,
-          dt_nascimento: user.dt_nascimento.value,
+          dt_nascimento: formatar_data(user.dt_nascimento.value),
           status: user.status.value,
         })
         .then(({ data }) => toast.success(data))

@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import userRotas from "./rotas/ocorrencias.js"
+import userRotas from "./rotas/proprietarios.js"
 
 const app = express();
 
