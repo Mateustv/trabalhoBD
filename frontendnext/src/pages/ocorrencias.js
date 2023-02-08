@@ -1,10 +1,10 @@
-import GlobalStyle from "./styles/global.js";
+import GlobalStyle from "../styles/global";
 import styled from "styled-components";
-import Form from "./components/Form.js";
+import { FormOcorrencias } from "../components/Form.jsx";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Grid from "./components/Grid.js";
+import Grid from "../components/Grid.jsx";
 import axios from "axios";
 
 const Container = styled.div`
@@ -19,7 +19,8 @@ const Container = styled.div`
 
 const Title = styled.h2``;
 
-function App() {
+
+export default function Home() {
   const [ocorrencias, setOcorrencias] = useState([]);
   const [onEdit, setOnEdit] = useState(null);
 
@@ -35,18 +36,15 @@ function App() {
   useEffect(() => {
     getOcorrencias();
   }, [setOcorrencias]);
-
   return (
     <>
       <Container>
         <Title>Ocorrências</Title>
-        <Form />
+        <FormOcorrencias />
         <Grid ocorrencias={ocorrencias} />
       </Container>
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
     </>
-  );
+  )
 }
-
-export default App;
