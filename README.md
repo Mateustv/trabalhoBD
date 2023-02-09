@@ -2,20 +2,21 @@
 
 primeiro de tudo instale as dependecias com 
 
-npm ou yarn
+npm ou yarn<br/>
 
 depois execute a api
 
-cd api 
-yarn start
+cd api  <br/>
+yarn start ou 
+npm start
 
-volte para pasta principal
+volte para pasta principal<br/>
 
-cd ..
+cd ..<br/>
 
-execute o frontendnext
+execute o frontendnext<br/>
 
-cd frontendnext
-yarn dev
+cd frontendnext<br/>
+yarn dev ou npm dev<br/>
 
 abra o navegaro em localhost
