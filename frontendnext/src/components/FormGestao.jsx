@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import axios from "axios";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const FormContainer = styled.form`
@@ -50,6 +50,14 @@ const Button = styled.button`
 export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
     const ref = useRef();
 
+    const [file, setFile] = useState(null);
+
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
+    console.log(file)
+
     const handleOnEdit = () => {
         setOnEdit(null)
         const user = ref.current;
@@ -84,6 +92,9 @@ export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const formData = new FormData();
+        formData.append("estatuto", file);
+
         const user = ref.current;
 
         if (
@@ -97,7 +108,6 @@ export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
         ) {
             return toast.warn("Preencha todos os campos!");
         }
-        //    console.log(onEdit)
         if (onEdit) {
             await axios
                 .put("http://localhost:8800/gestao/" + onEdit.CPF, {
@@ -105,13 +115,15 @@ export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
                     dt_inicio: formatar_data(user.dt_inicio.value),
                     dt_fim: formatar_data(user.dt_fim.value),
                     atos: user.atos.value,
-                    estatuto: user.estatuto.value,
+                    formData,
                     cpf_sindico: user.cpf_sindico.value,
                     cpf_subsindico: user.cpf_subsindico.value,
                 })
                 .then(({ data }) => toast.success(data))
                 .catch(({ data }) => toast.error(data));
+            console.log(user.estatuto)
         } else {
+            console.log(formatar_data(user.dt_fim.value))
             await axios
                 .post("http://localhost:8800/gestao", {
                     id_gestao: user.id_gestao.value,
@@ -139,7 +151,7 @@ export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
     };
 
     return (
-        <FormContainer ref={ref} onSubmit={handleSubmit} enctype="multipart/form-data">
+        <FormContainer ref={ref} onSubmit={handleSubmit}>
             <H3>Gestão</H3>
             <InputArea>
                 {onEdit ?
@@ -160,7 +172,7 @@ export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
                 <Label>Atos</Label>
                 <Input name="atos" />
                 <Label>Estatuto</Label>
-                <input type="file" name="estatuto" />
+                <input name="estatuto" type="file" onChange={handleFileChange} />
                 <Label>CPF - Sindico</Label>
                 <Input name="cpf_sindico" />
                 <Label>CPF - Subsindico</Label>

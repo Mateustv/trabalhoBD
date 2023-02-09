@@ -35,10 +35,26 @@ export default function gestao() {
     const [gestao, setGestao] = useState([]);
     const [onEdit, setOnEdit] = useState(null);
 
+    // const [src, setSrc] = useState(null);
+
+    const handleBlob = (dado) => {
+        dado.map((item, i) => {
+            if (item.ESTATUTO != null) {
+                const data = new Uint8Array(item.ESTATUTO);
+                const blob = new Blob([data], { type: "application/octet-stream" })
+                const src = URL.createObjectURL(blob)
+                item.ESTATUTO = src
+            }
+        })
+    }
+
     const getGestao = async () => {
         try {
             const res = await axios.get("http://localhost:8800/gestao");
-            setGestao(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
+            const dado = res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1));
+            console.log(dado)
+            handleBlob(dado);
+            setGestao(dado);
         } catch (error) {
             toast.error(error);
         }

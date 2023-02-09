@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
@@ -41,7 +41,6 @@ export const Td = styled.td`
 
 
 export const GridGestao = ({ gestao, setGestao, setOnEdit }) => {
-
     const formatar_data = (dataTempo) => {
         let data = new Date(dataTempo);
         let dataFormatada = ((data.getDate()) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear());
@@ -88,7 +87,12 @@ export const GridGestao = ({ gestao, setGestao, setOnEdit }) => {
                         <Td width="10%">{formatar_data(item.DT_INICIO)}</Td>
                         <Td width="10%">{formatar_data(item.DT_FIM)}</Td>
                         <Td width="20%">{item.ATOS}</Td>
-                        <Td width="8%">{item.ESTATUTO}</Td>
+                        {item.ESTATUTO == null ?
+                            <Td width="8%">{item.ESTATUTO}</Td>
+                            :
+                            <Td width="8%">{<img src={item.ESTATUTO} />}</Td>
+                        }
+                        {/* <Td width="8%">{item.ESTATUTO}</Td> */}
                         <Td width="15%">{item.CPF_SINDICO}</Td>
                         <Td width="15%">{item.CPF_SUBSINDICO}</Td>
                         <Td alignCenter width="6%">
