@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Bytes && Bytes{% endblock %}
+
+{% block content %}
+
+<br>
+<h3 style="text-align:center;"><strong>Ocorrência nº: </strong><i>{{view.id_ocorrencia}}</i></h3>
+<br><br>
+
+
+<div class="offset-1 col-10 cad-div">
+    <div class="col-6 m-auto pt-4 pb-2 ">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-secondary"><strong>ID Ocorrência: </strong>{{view.id_ocorrencia}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Título: </strong>{{view.titulo}}</li>
+            <li class="list-group-item list-group-item-secondary"> <strong>Descrição: </strong>{{view.descricao}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Autor: </strong>{{view.nome}}</li>
+            <li class="list-group-item list-group-item-secondary"><strong>Data: </strong>{{view.data}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Hora: </strong>{{view.hora}}</li>
+            <li class="list-group-item list-group-item-secondary"><strong>Foto: </strong>{{view.arquivo}}</li>
+        </ul>
+    </div>
+</div>
+<div class="col-8 m-auto pt-3 pb-2 text-center">
+    <a href="/ocorrencia/" class="btn btn-secondary">Voltar</a>
+</div>
+<br><br>
+
+{% endblock %}

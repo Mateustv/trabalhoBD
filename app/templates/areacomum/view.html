@@ -1,0 +1,27 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Bytes && Bytes{% endblock %}
+
+{% block content %}
+
+<br>
+<h3 style="text-align:center;"><strong>Visualizando dados da Área Comum: </strong><i>{{view.nome}}</i></h3>
+<br><br>
+
+
+<div class="offset-1 col-10 cad-div">
+    <div class="col-6 m-auto pt-4 pb-2 ">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-secondary"><strong>ID_AREA: </strong>{{view.id_area}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Nome: </strong>{{view.nome}}</li>
+            <li class="list-group-item list-group-item-secondary"> <strong>Regras: </strong>{{view.regras}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Capacidade: </strong>{{view.capacidade}}</li>
+        </ul>
+    </div>
+</div>
+<div class="col-8 m-auto pt-3 pb-2 text-center">
+    <a href="/areacomum/" class="btn btn-secondary">Voltar</a>
+</div>
+<br><br>
+
+{% endblock %}

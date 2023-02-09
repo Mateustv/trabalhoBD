@@ -1,0 +1,82 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Bytes && Bytes{% endblock %}
+
+{% block content %}
+<br>
+<div class="offset-1 col-10 cad-div">
+    <h2 style="text-align: center;"><strong>Ocorrências - Condomínio Bytes && Bytes</strong></h4>
+    <a id="add-link" href="/createOcorrencia/">
+        <div class="col-2.9 add-div">
+            <i class="fa fa-plus"></i> Adicionar uma Ocorrência
+        </div>
+    </a>
+    <div class="col-8 cad-search">
+        <form method="GET" id="search-form">
+        <input class="form-control" type="text" id="search" name="search" placeholder="Pesquisar Ocorrência..." value="{{ request.GET.search }}">
+        <i class="fa-solid fa-magnifying-glass" id="search-btn"></i>
+        </form>
+    </div>
+    {%if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{message.tags}}"{% endif %}>{{message}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <!--Tabela que mostra o banco de dados-->
+    <table style="text-align: center;" class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID Ocorrencia</th>
+            <th scope="col">Título</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for ocorrencia in ocorrencias %}
+
+                <tr>
+                    <th>
+                        <span><a id="add-link" href="/viewOcorrencia/{{ocorrencia.id_ocorrencia}}">{{ocorrencia.id_ocorrencia}}</a></span>
+                    </th>
+                    <td>
+                        <span>{{ocorrencia.titulo}}</a></span>
+                    </td>
+                    <td>
+                        <span>{{ocorrencia.nome}}</a></span>
+                    </td>
+                    <td>
+                        <a id="add-link" href="/deleteOcorrencia/{{ocorrencia.id_ocorrencia}}" class="delete-btn">
+                        <span><i class="fa fa-trash"></i></span>
+                        </a>
+                        <a id="add-link" href="/editOcorrencia/{{ocorrencia.id_ocorrencia}}">
+                        <span><i class="fa fa-edit"></i></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if ocorrencias.has_previous %}
+                <a href="?page={{ ocorrencias.previous_page_number }}"><i class="fa fa-arrow-left"></i> </a>
+            {% endif %}
+
+            {% if ocorrencias.paginator.num_pages %}
+            <span class="current">
+                {{ ocorrencias.number }} de {{ ocorrencias.paginator.num_pages }}
+            </span>
+            {% endif %}
+
+            {% if ocorrencias.has_next %}
+                <a href="?page={{ ocorrencias.next_page_number }}"><i class="fa fa-arrow-right"></i> </a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+
+{% endblock %}

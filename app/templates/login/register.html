@@ -1,0 +1,50 @@
+{%  extends 'login/main.html' %}
+
+{% block content %}
+
+    <div class="sidenav">
+         <div class="login-main-text">
+            <h2>Condomínio <br> Bytes && Bytes</h2>
+            <p>Sistema de Gestão do condomínio</p>
+         </div>
+    </div>
+
+    <div class="main">
+        <form name="form-users" id="formUsers" method="post" action="/store/">
+        <div class="col-md-4 col-sm-12">
+            <div class="login-form">
+                {% if msg %}
+                    <div class="alert {{class}}">
+                    {{msg}}
+                    </div>
+                {% endif %}
+
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input class="form-control" type="text" name="name" id="name" placeholder="Nome">
+                    </div>
+                    <div class="form-group">
+                        <label>Usuário</label>
+                        <input class="form-control" type="text" name="user" id="user" placeholder="Usuário">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Senha">
+                    </div>
+                    <div class="form-group">
+                        <label>Repita a Senha</label>
+                        <input class="form-control" type="password" name="password-conf" id="password-conf" placeholder="Repita a Senha">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="Email">
+                    </div>
+                <input class="btn btn-dark" type="submit" value="Cadastrar">
+                <input class="btn btn-secondary" type="submit" formaction="/formlogin/" value="Login">
+            </div>
+        </div>
+        </form>
+    </div>
+
+{% endblock %}

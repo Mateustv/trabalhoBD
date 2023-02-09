@@ -1,0 +1,38 @@
+{%  extends 'login/main.html' %}
+
+{% block content %}
+    <div class="sidenav">
+         <div class="login-main-text">
+            <h2>Condomínio <br> Bytes && Bytes</h2>
+            <p>Sistema de Gestão do condomínio</p>
+         </div>
+    </div>
+
+    <div class="main">
+        <form name="form-login" id="formLogin" method="post" action="/dologin/">
+        <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                {% if msg %}
+                    <div class="alert {{class}}">
+                    {{msg}}
+                    </div>
+                {% endif %}
+
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label>Usuário</label>
+                        <input class="form-control" type="text" name="user" id="user" placeholder="Usuário">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Senha">
+                    </div>
+            <input class="btn btn-dark" type="submit" value="Entrar">
+            <a href="/" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+        </form>
+    </div>
+
+
+{% endblock %}

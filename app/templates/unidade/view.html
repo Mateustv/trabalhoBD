@@ -1,0 +1,31 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Bytes && Bytes{% endblock %}
+
+{% block content %}
+
+<br>
+<h3 style="text-align:center;"><strong>Visualizando Unidade </strong>Bloco: {{view.bloco}} Número: {{view.numero}}</h3>
+<br><br>
+
+
+<div class="offset-1 col-10 cad-div">
+    <div class="col-6 m-auto pt-4 pb-2 ">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-secondary"><strong>Condomínio Bytes && Bytes </strong></li>
+            <li class="list-group-item list-group-item-dark"><strong>Bloco </strong>{{view.bloco}}</li>
+            <li class="list-group-item list-group-item-secondary"> <strong>Número: </strong>{{view.numero}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Localização da Vaga: </strong>{{view.vaga}}</li>
+            <li class="list-group-item list-group-item-secondary"><strong>Placa Autorizada: </strong>{{view.placa}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Proprietário: </strong>{{view.proprietario}}</li>
+            <li class="list-group-item list-group-item-secondary"><strong>Telefone Proprietário: </strong>{{view.proprietario.telefone}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Status: </strong>{{view.proprietario.cargo}}</li>
+        </ul>
+    </div>
+</div>
+<div class="col-8 m-auto pt-3 pb-2 text-center">
+    <a href="/unidade/" class="btn btn-secondary">Voltar</a>
+</div>
+<br><br>
+
+{% endblock %}

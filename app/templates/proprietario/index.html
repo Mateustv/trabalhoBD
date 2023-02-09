@@ -1,0 +1,78 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Bytes && Bytes{% endblock %}
+
+{% block content %}
+<br>
+<div class="offset-1 col-10 cad-div">
+    <h2 style="text-align: center;"><strong>Proprietários - Condomínio Bytes && Bytes</strong></h4>
+    <a id="add-link" href="/create/">
+        <div class="col-2.9 add-div">
+            <i class="fa fa-plus"></i> Cadastrar Novo Proprietário
+        </div>
+    </a>
+    <div class="col-8 cad-search">
+        <form method="GET" id="search-form">
+        <input class="form-control" type="text" id="search" name="search" placeholder="Pesquisar Proprietário..." value="{{ request.GET.search }}">
+        
+        </form>
+    </div>
+    {%if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{message.tags}}"{% endif %}>{{message}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <!--Tabela que mostra o banco de dados-->
+    <table style="text-align: center;" class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">CPF</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for proprietario in proprietarios %}
+
+                <tr>
+                    <th>
+                        <span><a id="add-link" href="/view/{{proprietario.cpf}}">{{proprietario.cpf}}</a></span>
+                    </th>
+                    <td>
+                        <span>{{proprietario.nome}}</a></span>
+                    </td>
+                    <td>
+                        <a id="add-link" href="/delete/{{proprietario.cpf}}" class="delete-btn">
+                        <span><i class="fa fa-trash"></i></span>
+                        </a>
+                        <a id="add-link" href="/edit/{{proprietario.cpf}}">
+                        <span><i class="fa fa-edit"></i></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if proprietarios.has_previous %}
+                <a href="?page={{ proprietarios.previous_page_number }}"><i class="fa fa-arrow-left"></i> </a>
+            {% endif %}
+
+            {% if proprietarios.paginator.num_pages %}
+            <span class="current">
+                {{ proprietarios.number }} de {{ proprietarios.paginator.num_pages }}
+            </span>
+            {% endif %}
+
+            {% if proprietarios.has_next %}
+                <a href="?page={{ proprietarios.next_page_number }}"><i class="fa fa-arrow-right"></i> </a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+
+{% endblock %}

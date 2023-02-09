@@ -1,0 +1,31 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Bytes && Bytes{% endblock %}
+
+{% block content %}
+
+<br>
+<h3 style="text-align:center;"><strong>Visualizando dados do Proprietário: </strong><i>{{view.nome}}</i></h3>
+<br><br>
+
+
+<div class="offset-1 col-10 cad-div">
+    <div class="col-6 m-auto pt-4 pb-2 ">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-secondary"><strong>CPF: </strong>{{view.cpf}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Nome: </strong>{{view.nome}}</li>
+            <li class="list-group-item list-group-item-secondary"> <strong>Telefone: </strong>{{view.telefone}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>E-mail: </strong>{{view.email}}</li>
+            <li class="list-group-item list-group-item-secondary"><strong>Data de Nascimento: </strong>{{view.dt_nasc}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Status Condomínio: </strong>{{view.cargo}}</li>
+            <li class="list-group-item list-group-item-secondary"><strong>Data de Inclusão do Proprietário: </strong>{{view.created_at}}</li>
+            <li class="list-group-item list-group-item-dark"><strong>Data de Alteração do Proprietário: </strong>{{view.update_at}}</li>
+        </ul>
+    </div>
+</div>
+<div class="col-8 m-auto pt-3 pb-2 text-center">
+    <a href="/proprietario/" class="btn btn-secondary">Voltar</a>
+</div>
+<br><br>
+
+{% endblock %}

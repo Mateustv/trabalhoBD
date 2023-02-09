@@ -1,0 +1,95 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Bytes && Bytes{% endblock %}
+
+{% block content %}
+<br>
+<div class="offset-1 col-10 cad-div">
+    <h2 style="text-align: center;"><strong>Reuniões - Condomínio Bytes && Bytes</strong></h4>
+    <a id="add-link" href="/createReuniao/">
+        <div class="col-2.9 add-div">
+            <i class="fa fa-plus"></i> Adicionar uma Reunião
+        </div>
+    </a>
+    <div class="col-8 cad-search">
+        <form method="GET" id="search-form">
+        <input class="form-control" type="text" id="search" name="search" placeholder="Pesquisar Reunião..." value="{{ request.GET.search }}">
+        <i class="fa fa-search" id="search-btn"></i>
+        </form>
+    </div>
+    {%if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{message.tags}}"{% endif %}>{{message}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <!--Tabela que mostra o banco de dados-->
+    <table style="text-align: center;" class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID Reunião</th>
+            <th scope="col">Data</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Pauta</th>
+            <th scope="col">Local</th>
+            <th scope="col">Relatório</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for reuniao in reunioes %}
+
+                <tr>
+                    <th>
+                        <span><a id="add-link" href="/viewReuniao/{{reuniao.id_reuniao}}">{{reuniao.id_reuniao}}</a></span>
+                    </th>
+                    <td>
+                        <span>{{reuniao.data}}</a></span>
+                    </td>
+                    <td>
+                        <span>{{reuniao.hora}}</a></span>
+                    </td>
+                    <td>
+                        <span>{{reuniao.pauta}}</a></span>
+                    </td>
+                    <td>
+                        <span>{{reuniao.local}}</a></span>
+                    </td>
+                    <td>
+                        <span>{{reuniao.relatorio.url}}</a></span>
+                    </td>
+                    <td>
+                        <a id="add-link" href="/delete/{{reuniao.id_reuniao}}" class="delete-btn">
+                        <span><i class="fa fa-trash"></i></span>
+                        </a>
+                        <a id="add-link" href="/edit/{{reuniao.id_reuniao}}">
+                        <span><i class="fa fa-edit"></i></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if proprietarios.has_previous %}
+                <a href="?page={{ proprietarios.previous_page_number }}"><i class="fa fa-arrow-left"></i> </a>
+            {% endif %}
+
+            {% if proprietarios.paginator.num_pages %}
+            <span class="current">
+                {{ proprietarios.number }} de {{ proprietarios.paginator.num_pages }}
+            </span>
+            {% endif %}
+
+            {% if proprietarios.has_next %}
+                <a href="?page={{ proprietarios.next_page_number }}"><i class="fa fa-arrow-right"></i> </a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+
+
+{% endblock %}
