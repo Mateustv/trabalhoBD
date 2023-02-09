@@ -54,8 +54,8 @@ export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
-    };
 
+    };
     console.log(file)
 
     const handleOnEdit = () => {
@@ -83,7 +83,7 @@ export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
             user.dt_inicio.value = formatar_data(onEdit.DT_INICIO);
             user.dt_fim.value = formatar_data(onEdit.DT_FIM);
             user.atos.value = onEdit.ATOS;
-            user.estatuto.value = onEdit.ESTATUTO;
+            //            user.estatuto.value = onEdit.ESTATUTO;
             user.cpf_sindico.value = onEdit.CPF_SINDICO;
             user.cpf_subsindico.value = onEdit.CPF_SUBSINDICO;
         }
@@ -91,9 +91,6 @@ export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const formData = new FormData();
-        formData.append("estatuto", file);
 
         const user = ref.current;
 
@@ -110,20 +107,18 @@ export const FormGestao = ({ onEdit, setOnEdit, getGestao }) => {
         }
         if (onEdit) {
             await axios
-                .put("http://localhost:8800/gestao/" + onEdit.CPF, {
+                .put("http://localhost:8800/gestao/" + onEdit.ID_GESTAO, {
                     id_gestao: user.id_gestao.value,
                     dt_inicio: formatar_data(user.dt_inicio.value),
                     dt_fim: formatar_data(user.dt_fim.value),
                     atos: user.atos.value,
-                    formData,
+                    estatuto: user.estatuto.value,
                     cpf_sindico: user.cpf_sindico.value,
                     cpf_subsindico: user.cpf_subsindico.value,
                 })
                 .then(({ data }) => toast.success(data))
                 .catch(({ data }) => toast.error(data));
-            console.log(user.estatuto)
         } else {
-            console.log(formatar_data(user.dt_fim.value))
             await axios
                 .post("http://localhost:8800/gestao", {
                     id_gestao: user.id_gestao.value,

@@ -174,7 +174,7 @@ export const addGestao = (req, res) => {
 
 export const updateGestao = (req, res) => {
     const q =
-        "UPDATE unidades SET `id_gestao` = ?, `dt_inicio` = ?, `dt_fim` = ?, `atos` = ?, `estatuto` = ?, `cpf_sindico` = ?, `cpf_subsindico` = ? WHERE `id_gestao` = ?";
+        "UPDATE gestao SET `id_gestao` = ?, `dt_inicio` = ?, `dt_fim` = ?, `atos` = ?, `estatuto` = ?, `cpf_sindico` = ?, `cpf_subsindico` = ? WHERE `id_gestao` = ?";
 
     const values = [
         parseInt(req.body.id_gestao),
@@ -185,7 +185,6 @@ export const updateGestao = (req, res) => {
         req.body.cpf_sindico,
         req.body.cpf_subsindico,
     ];
-    console.log(values)
     db.query(q, [...values, parseInt(req.params.id)], (err) => {
         if (err) res.json(err);
 

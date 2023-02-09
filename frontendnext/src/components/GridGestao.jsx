@@ -56,7 +56,6 @@ export const GridGestao = ({ gestao, setGestao, setOnEdit }) => {
             .delete("http://localhost:8800/gestao/" + id)
             .then(({ data }) => {
                 const newArray = gestao.filter((proprietario) => proprietario.ID_GESTAO !== id);
-                console.log(newArray)
                 setGestao(newArray);
                 toast.success(data);
             })
@@ -99,7 +98,7 @@ export const GridGestao = ({ gestao, setGestao, setOnEdit }) => {
                             <FaEdit onClick={() => handleEdit(item)} />
                         </Td>
                         <Td alignCenter width="5%">
-                            <FaTrash onClick={() => handleDelete(item.CPF)} />
+                            <FaTrash onClick={() => handleDelete(item.ID_GESTAO)} />
                         </Td>
                     </Tr>
                 ))
